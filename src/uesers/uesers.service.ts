@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { User } from './user.model';
 import { CreateUserDto } from './user.dto';
 import { UpdateUsertDto } from 'src/dto/update-user.dto';
-import { PasswordHasing } from 'src/utils/brcypt';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
