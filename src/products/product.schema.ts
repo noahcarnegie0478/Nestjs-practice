@@ -1,25 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema({
-  toJSON: {
-    virtuals: true,
-    versionKey: false,
-    transform: (doc, ret) => {
-      delete ret._id;
-      delete ret.__v;
-      return ret;
-    },
-  },
-  toObject: {
-    virtuals: true,
-    versionKey: false,
-    transform: (doc, ret) => {
-      delete ret._id;
-      delete ret.__v;
-      return ret;
-    },
-  },
-})
+@Schema()
 export class Product {
   @Prop()
   id: string;
@@ -31,10 +12,3 @@ export class Product {
   price: number;
 }
 export const ProductSchema = SchemaFactory.createForClass(Product);
-
-ProductSchema.pre('save', function (next) {
-  if (this.isNew) {
-    this.id = this._id.toString();
-  }
-  next();
-});

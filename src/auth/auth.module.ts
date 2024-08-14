@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -7,6 +8,7 @@ import { UesersService } from 'src/uesers/uesers.service';
 import { UesersModule } from 'src/uesers/uesers.module';
 import { JwtModule } from '@nestjs/jwt';
 import { JWTStrategy } from './jwt.strategies';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   controllers: [AuthController],
@@ -14,8 +16,9 @@ import { JWTStrategy } from './jwt.strategies';
   imports: [
     PassportModule,
     UesersModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     JwtModule.register({
-      secret: 'Noah_handsome',
+      secret: process.env.SECRET_KEY,
       signOptions: { expiresIn: '60s' },
     }),
   ],
